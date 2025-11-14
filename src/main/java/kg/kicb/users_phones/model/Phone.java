@@ -7,24 +7,20 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
-import java.time.LocalDate;
-import java.util.List;
-
 @Entity
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "users")
-public class User {
+@Table(name = "phones")
+public class Phone {
 
     @GeneratedValue
     @Id
     Long id;
-    String name;
-    String email;
-    LocalDate dateOfBirth;
+    String phoneNumber;
 
-    @OneToMany(mappedBy = "user")
-    List<Phone> phones;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    User user;
 }

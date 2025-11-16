@@ -84,4 +84,10 @@ public class PhoneServiceImpl implements PhoneService {
         List<Phone> phones = phoneRepo.findAll();
         return phoneMapper.phonesToPhoneDtos(phones);
     }
+
+    @Override
+    public PhoneDto findPhoneById(Long id) {
+        Phone phone = phoneRepo.findById(id).orElseThrow(() -> new PhoneNotFoundException("Phone с таким ID не найден!"));
+        return phoneMapper.phoneToPhoneDto(phone);
+    }
 }

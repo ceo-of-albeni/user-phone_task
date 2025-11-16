@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/users")
 @Tag(name = "User Controller", description = "User controller")
 public class UserController {
 
@@ -60,5 +60,13 @@ public class UserController {
         return ResponseEntity.ok(users);
     }
 
+    @GetMapping("/{id}")
+    @Operation(summary = "Получение пользователя по ID", description = "В этом методе получаем объект User.")
+    @ApiResponse(responseCode = "200", description = "User успешно найден!")
+    @ApiResponse(responseCode = "404", description = "User не найден!")
+    public ResponseEntity<UserDto> getUserById(@PathVariable Long id) {
+        UserDto userDto = userService.findUserById(id);
+        return ResponseEntity.ok(userDto);
+    }
 
 }

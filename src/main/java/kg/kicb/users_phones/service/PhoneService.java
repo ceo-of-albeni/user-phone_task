@@ -13,4 +13,6 @@ public interface PhoneService {
     String deletePhone(Long id);
 
     List<PhoneDto> getAllPhones();
+
+    PhoneDto findPhoneById(Long id);
 }

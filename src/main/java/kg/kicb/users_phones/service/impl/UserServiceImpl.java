@@ -65,4 +65,10 @@ public class UserServiceImpl implements UserService {
         List<User> users = userRepo.findAll();
         return userMapper.usersToUserDtos(users);
     }
+
+    @Override
+    public UserDto findUserById(Long id) {
+        User user = userRepo.findById(id).orElseThrow(() -> new UserNotFoundException("User с таким ID не найден!"));
+        return userMapper.userToUserDto(user);
+    }
 }

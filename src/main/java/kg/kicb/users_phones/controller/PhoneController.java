@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/phone")
+@RequestMapping("/phones")
 @Tag(name = "Phone Controller", description = "Phone controller")
 public class PhoneController {
 
@@ -56,6 +56,15 @@ public class PhoneController {
     public ResponseEntity<List<PhoneDto>> getAllPhones() {
         List<PhoneDto> phones = phoneService.getAllPhones();
         return ResponseEntity.ok(phones);
+    }
+
+    @GetMapping("/{id}")
+    @Operation(summary = "Получение номера по ID", description = "В этом методе получаем объект Phone")
+    @ApiResponse(responseCode = "200", description = "Phone успешно найден.")
+    @ApiResponse(responseCode = "404", description = "Phone не найден.")
+    public ResponseEntity<PhoneDto> getPhoneById(@PathVariable Long id) {
+        PhoneDto phoneDto = phoneService.findPhoneById(id);
+        return ResponseEntity.ok(phoneDto);
     }
 
 }
